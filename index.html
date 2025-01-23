@@ -1,0 +1,23 @@
+                ctx.fillText("MA = 4, VR = 4", 180, 350);
+            }
+        }
+        
+        function startAnimation() {
+            const type = document.getElementById("pulleyType").value;
+            let y = 300;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawPulley(type);
+                ctx.fillStyle = "blue";
+                ctx.fillRect(245, y, 10, 40);
+                y -= 1;
+                if (y > 150) {
+                    animationFrame = requestAnimationFrame(animate);
+                }
+            }
+            cancelAnimationFrame(animationFrame);
+            animate();
+        }
+    </script>
+</body>
+</html>
