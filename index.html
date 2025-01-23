@@ -1,3 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Pulley Simulation</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { display: flex; justify-content: center; }
+        canvas { border: 2px solid black; background: #f4f4f4; }
+        .controls { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Understanding Pulleys</h1>
+    <p>Explore different types of pulleys and their Mechanical Advantage (MA) and Velocity Ratio (VR).</p>
+    
+    <div class="controls">
+        <label for="pulleyType">Choose Pulley Type:</label>
+        <select id="pulleyType">
+            <option value="fixed">Fixed Pulley</option>
+            <option value="movable">Movable Pulley</option>
+            <option value="block_tackle">Block & Tackle</option>
+        </select>
+        <button onclick="startAnimation()">Start Simulation</button>
+    </div>
+    
+    <div class="container">
+        <canvas id="pulleyCanvas" width="500" height="400"></canvas>
+    </div>
+    
+    <p id="info"></p>
+    
+    <script>
+        const canvas = document.getElementById("pulleyCanvas");
+        const ctx = canvas.getContext("2d");
+        let animationFrame;
+
+        function drawPulley(type) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "black";
+            ctx.font = "16px Arial";
+            ctx.fillText("Type: " + type, 20, 20);
+            
+            if (type === "fixed") {
+                ctx.beginPath();
+                ctx.arc(250, 100, 40, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.moveTo(250, 140);
+                ctx.lineTo(250, 300);
+                ctx.stroke();
+                ctx.fillText("MA = 1, VR = 1", 180, 350);
+            }
+            else if (type === "movable") {
+                ctx.beginPath();
+                ctx.arc(250, 200, 40, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.moveTo(250, 160);
+                ctx.lineTo(250, 100);
+                ctx.stroke();
+                ctx.moveTo(210, 200);
+                ctx.lineTo(290, 200);
+                ctx.stroke();
+                ctx.fillText("MA = 2, VR = 2", 180, 350);
+            }
+            else if (type === "block_tackle") {
+                ctx.beginPath();
+                ctx.arc(200, 100, 40, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.arc(300, 200, 40, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.moveTo(200, 140);
+                ctx.lineTo(200, 200);
+                ctx.stroke();
+                ctx.moveTo(300, 160);
+                ctx.lineTo(300, 100);
+                ctx.stroke();
                 ctx.fillText("MA = 4, VR = 4", 180, 350);
             }
         }
